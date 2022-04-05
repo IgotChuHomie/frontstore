@@ -1,4 +1,5 @@
 import email
+from pyexpat import model
 from django.db import models
 
 # Create your models here.
@@ -25,9 +26,19 @@ class Customer(models.Model) :
     email = models.EmailField(unique=True)
     phone = models.CharField(max_length=255)
     birth_date = models.DateField(null=True)
-    membership = models.CharField(max_length=255,choices=MEMBERSHIP_CHOICES,default=MEMBERSHIP_BRONZE)
+    membership = models.CharField(max_length=1,choices=MEMBERSHIP_CHOICES,default=MEMBERSHIP_BRONZE)
     
 
+
+class Order(models.Model) :
+    PAYMENT_PENDING = 'P'
+    PAYMENT_COMPLETE  = 'C'
+    PAYMENT_FAILED = 'F'
+        
+    PAYMENT_STATUS = [(PAYMENT_PENDING,'Pending'),(PAYMENT_COMPLETE,'Complete'),(PAYMENT_FAILED,'Failed')]
+    placed_at = models.DateTimeField(auto_now_add=True)
+    payment_status = models.CharField(max_length=1,choices=PAYMENT_STATUS,default=PAYMENT_PENDING)
+    
 
     
     
