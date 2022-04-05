@@ -2,6 +2,9 @@ import email
 from pyexpat import model
 from django.db import models
 
+class collection(models.Model):
+    title = models.CharField(max_length=255)
+
 # Create your models here.
 class Product(models.Model) :
     title = models.CharField(max_length=255)
@@ -44,4 +47,7 @@ class Address(models.Model) :
     street = models.CharField(max_length=255)
     city = models.CharField(max_length=255)
     customer = models.OneToOneField(Customer,on_delete=models.CASCADE,primary_key=True)
-    
+    #defining one to many relationship 
+    '''
+    customer = models.ForeignKey(Customer,on_delete=models.CASCADE)
+    '''
